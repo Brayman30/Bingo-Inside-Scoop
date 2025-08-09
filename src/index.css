@@ -3,121 +3,193 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-bg: hsl(210 30% 98%);
-    --color-bg-alt: hsl(210 30% 96%);
-    --color-fg: hsl(201 100% 14%);
-    --color-fg-soft: hsl(201 20% 35%);
-    --ring-brand: hsl(51 99% 47% / 0.55);
-  }
+	:root {
+		--color-bg: hsl(210 30% 98%);
+		--color-bg-alt: hsl(210 30% 96%);
+		--color-fg: hsl(201 100% 14%);
+		--color-fg-soft: hsl(201 20% 35%);
+		--ring-brand: hsl(51 99% 47% / 0.55);
+	}
 
-  body {
-    font-family:
-      "Inter Variable",
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      "Noto Sans",
-      sans-serif,
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol",
-      "Noto Color Emoji";
-    color: var(--color-fg);
-    -webkit-font-smoothing: antialiased;
-    /* Lightened initial stops to ensure base text contrast and reduced large dark region behind navy text */
-    background:
-      radial-gradient(circle at 15% 20%, hsl(51 99% 47% / 0.10), transparent 60%),
-      radial-gradient(circle at 85% 80%, hsl(142 39% 22% / 0.15), transparent 65%),
-      linear-gradient(135deg, hsl(201 100% 18%) 0%, hsl(142 39% 24%) 55%, hsl(51 99% 47%) 120%);
-    background-attachment: fixed;
-    min-height: 100vh;
-  }
-  .skip-link {
-    position: absolute;
-    top: -40px; left: 0; background: hsl(201 100% 14%); color: #fff; padding: 8px 16px; z-index: 100; border-radius: 0 0 6px 0; font-weight: 600; transition: top .2s;
-  }
-  .skip-link:focus { top: 0; outline: 2px solid hsl(51 99% 47%); outline-offset: 2px; }
+	body {
+		font-family:
+			"Inter Variable",
+			ui-sans-serif,
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			"Helvetica Neue",
+			Arial,
+			"Noto Sans",
+			sans-serif,
+			"Apple Color Emoji",
+			"Segoe UI Emoji",
+			"Segoe UI Symbol",
+			"Noto Color Emoji";
+		color: var(--color-fg);
+		-webkit-font-smoothing: antialiased;
+		/* Lightened initial stops to ensure base text contrast and reduced large dark region behind navy text */
+		background:
+			radial-gradient(circle at 15% 20%, hsl(51 99% 47% / 0.1), transparent 60%),
+			radial-gradient(
+				circle at 85% 80%,
+				hsl(142 39% 22% / 0.15),
+				transparent 65%
+			),
+			linear-gradient(
+				135deg,
+				hsl(201 100% 18%) 0%,
+				hsl(142 39% 24%) 55%,
+				hsl(51 99% 47%) 120%
+			);
+		background-attachment: fixed;
+		min-height: 100vh;
+	}
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 0;
+		background: hsl(201 100% 14%);
+		color: #fff;
+		padding: 8px 16px;
+		z-index: 100;
+		border-radius: 0 0 6px 0;
+		font-weight: 600;
+		transition: top 0.2s;
+	}
+	.skip-link:focus {
+		top: 0;
+		outline: 2px solid hsl(51 99% 47%);
+		outline-offset: 2px;
+	}
 }
 
 @layer components {
-  .accent-text { @apply text-secondary; }
+	.accent-text {
+		@apply text-secondary;
+	}
 
-  .card-glass {
-    @apply relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-md border border-white/40 shadow-brand-soft transition-colors;
-  }
-  .card-glass-dark {
-    @apply relative overflow-hidden rounded-2xl bg-surface-dark/60 backdrop-blur-md border border-white/10 shadow-brand-soft text-white;
-  }
-  .card-glow-border {
-    position: relative;
-  }
-  .card-glow-border:before {
-    content: "";
-    position: absolute; inset: 0; padding: 1px; border-radius: 1rem;
-    background: linear-gradient(140deg, hsl(51 99% 47% / .8), hsl(142 39% 22% / .7), hsl(201 100% 14% / .8));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    pointer-events: none;
-  }
+	.card-glass {
+		@apply relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-md border border-white/40 shadow-brand-soft transition-colors;
+	}
+	.card-glass-dark {
+		@apply relative overflow-hidden rounded-2xl bg-surface-dark/60 backdrop-blur-md border border-white/10 shadow-brand-soft text-white;
+	}
+	.card-glow-border {
+		position: relative;
+	}
+	.card-glow-border:before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		padding: 1px;
+		border-radius: 1rem;
+		background: linear-gradient(
+			140deg,
+			hsl(51 99% 47% / 0.8),
+			hsl(142 39% 22% / 0.7),
+			hsl(201 100% 14% / 0.8)
+		);
+		-webkit-mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+	}
 
-  .btn-brand {
-    /* Removed full gold segment in gradient to improve white text contrast and WCAG ratio */
-    @apply inline-flex items-center justify-center font-semibold rounded-lg px-5 py-3 text-white bg-gradient-to-r from-grayson-navy via-grayson-green-alt to-grayson-green shadow-brand-soft transition-all duration-300 hover:shadow-xl hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[--ring-brand] focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed;
-    background-size: 180% 100%;
-  }
-  .btn-brand:hover { background-position: 100% 0; }
-  .btn-accent-gold {
-    /* High contrast navy text on gold background */
-    @apply inline-flex items-center justify-center font-semibold rounded-lg px-5 py-3 text-grayson-navy bg-grayson-gold hover:bg-grayson-gold-alt transition-all shadow-brand-soft hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[--ring-brand] focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-  .btn-outline-brand {
-    @apply inline-flex items-center justify-center font-medium rounded-lg px-5 py-3 border border-grayson-green/50 text-grayson-navy bg-white/60 backdrop-blur-sm hover:bg-white/80 hover:border-grayson-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-[--ring-brand];
-  }
-  .badge-gold { @apply inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-grayson-navy bg-grayson-gold-soft px-2.5 py-1 rounded-full border border-grayson-gold/40; }
+	.btn-brand {
+		/* Removed full gold segment in gradient to improve white text contrast and WCAG ratio */
+		@apply inline-flex items-center justify-center font-semibold rounded-lg px-5 py-3 text-white bg-gradient-to-r from-grayson-navy via-grayson-green-alt to-grayson-green shadow-brand-soft transition-all duration-300 hover:shadow-xl hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[--ring-brand] focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed;
+		background-size: 180% 100%;
+	}
+	.btn-brand:hover {
+		background-position: 100% 0;
+	}
+	.btn-accent-gold {
+		/* High contrast navy text on gold background */
+		@apply inline-flex items-center justify-center font-semibold rounded-lg px-5 py-3 text-grayson-navy bg-grayson-gold hover:bg-grayson-gold-alt transition-all shadow-brand-soft hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[--ring-brand] focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed;
+	}
+	.btn-outline-brand {
+		@apply inline-flex items-center justify-center font-medium rounded-lg px-5 py-3 border border-grayson-green/50 text-grayson-navy bg-white/60 backdrop-blur-sm hover:bg-white/80 hover:border-grayson-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-[--ring-brand];
+	}
+	.badge-gold {
+		@apply inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-grayson-navy bg-grayson-gold-soft px-2.5 py-1 rounded-full border border-grayson-gold/40;
+	}
 
-  a { @apply text-primary underline-offset-2; }
-  a:hover { @apply underline text-primary-hover; }
-  a:focus-visible { @apply outline-none ring-2 ring-grayson-gold/70 ring-offset-2 ring-offset-white; }
+	a {
+		@apply text-primary underline-offset-2;
+	}
+	a:hover {
+		@apply underline text-primary-hover;
+	}
+	a:focus-visible {
+		@apply outline-none ring-2 ring-grayson-gold/70 ring-offset-2 ring-offset-white;
+	}
 
-  /* Auth specific */
-  .auth-input-field {
-    @apply w-full px-4 py-3 rounded-lg bg-white/80 backdrop-blur border border-border-subtle focus:border-grayson-gold focus:ring-2 focus:ring-grayson-gold/40 outline-none transition-all shadow-sm hover:shadow;
-  }
-  .auth-button {
-    @apply w-full px-4 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-grayson-green via-grayson-navy to-grayson-gold hover:brightness-110 transition-all shadow-brand-soft hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed;
-    background-size: 180% 100%;
-  }
-  .auth-button:hover { background-position: 100% 0; }
+	/* Auth specific */
+	.auth-input-field {
+		@apply w-full px-4 py-3 rounded-lg bg-white/80 backdrop-blur border border-border-subtle focus:border-grayson-gold focus:ring-2 focus:ring-grayson-gold/40 outline-none transition-all shadow-sm hover:shadow;
+	}
+	.auth-button {
+		@apply w-full px-4 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-grayson-green via-grayson-navy to-grayson-gold hover:brightness-110 transition-all shadow-brand-soft hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed;
+		background-size: 180% 100%;
+	}
+	.auth-button:hover {
+		background-position: 100% 0;
+	}
 }
 
 @layer utilities {
-  .gradient-text-gold {
-    background: linear-gradient(90deg, hsl(51 99% 47%), hsl(51 99% 55%));
-    -webkit-background-clip: text; color: transparent;
-  }
-  .gradient-text-brand {
-    background: linear-gradient(90deg, hsl(201 100% 14%), hsl(142 39% 22%), hsl(51 99% 47%));
-    -webkit-background-clip: text; color: transparent;
-  }
-  .divider-soft {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-border-subtle to-transparent;
-  }
-  .hover-raise { @apply transition-transform duration-300 hover:-translate-y-1; }
-  /* Use Tailwind's generated animate-fade-in & animate-rise directly; avoid circular @apply */
-  /* If semantic aliases are desired, uncomment and use distinct class names: */
-  /* .fade-in-enter { @apply animate-fade-in; } */
-  /* .rise-enter { @apply animate-rise; } */
-  .focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-grayson-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white; }
-  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
+	.gradient-text-gold {
+		background: linear-gradient(90deg, hsl(51 99% 47%), hsl(51 99% 55%));
+		-webkit-background-clip: text;
+		color: transparent;
+	}
+	.gradient-text-brand {
+		background: linear-gradient(
+			90deg,
+			hsl(201 100% 14%),
+			hsl(142 39% 22%),
+			hsl(51 99% 47%)
+		);
+		-webkit-background-clip: text;
+		color: transparent;
+	}
+	.divider-soft {
+		@apply h-px w-full bg-gradient-to-r from-transparent via-border-subtle to-transparent;
+	}
+	.hover-raise {
+		@apply transition-transform duration-300 hover:-translate-y-1;
+	}
+	/* Use Tailwind's generated animate-fade-in & animate-rise directly; avoid circular @apply */
+	/* If semantic aliases are desired, uncomment and use distinct class names: */
+	/* .fade-in-enter { @apply animate-fade-in; } */
+	/* .rise-enter { @apply animate-rise; } */
+	.focus-ring {
+		@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-grayson-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+	}
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation: none !important;
+			transition: none !important;
+		}
+	}
 }
 
 /* only use this to update the style of the auth input fields. use a different class for all other input fields */
@@ -125,34 +197,42 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+	background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+	background: #cbd5e1;
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+	background: #94a3b8;
 }
 
 /* Smooth focus transitions */
 input:focus,
 textarea:focus,
-select:focus { outline: none; }
+select:focus {
+	outline: none;
+}
 
 /* Animation for form submission success */
 @keyframes success-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 .success-animation {
-  animation: success-pulse 0.3s ease-in-out;
+	animation: success-pulse 0.3s ease-in-out;
 }
