@@ -9,9 +9,9 @@ export function SignInForm() {
   const [submitting, setSubmitting] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className="w-full card-glass p-8 rounded-2xl shadow-brand-soft">
       <form
-        className="flex flex-col gap-form-field"
+        className="flex flex-col gap-5"
         onSubmit={(e) => {
           e.preventDefault();
           setSubmitting(true);
@@ -64,13 +64,13 @@ export function SignInForm() {
           </button>
         </div>
       </form>
-      <div className="flex items-center justify-center my-3">
-        <hr className="my-4 grow border-gray-200" />
-        <span className="mx-4 text-secondary">or</span>
-        <hr className="my-4 grow border-gray-200" />
+      <div className="flex items-center justify-center my-4">
+        <div className="divider-soft" />
+        <span className="mx-4 text-secondary text-xs uppercase tracking-wide">or</span>
+        <div className="divider-soft" />
       </div>
-      <button className="auth-button" onClick={() => void signIn("anonymous")}>
-        Sign in anonymously
+      <button className="btn-outline-brand" onClick={() => void signIn("anonymous")}>
+        Continue anonymously
       </button>
     </div>
   );
