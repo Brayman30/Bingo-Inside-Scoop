@@ -4,7 +4,7 @@ import { v } from "convex/values";
 export const submitClub = mutation({
   args: {
     clubName: v.string(),
-    description: v.string(),
+    description: v.optional(v.string()),
     submitterName: v.string(),
     submitterEmail: v.string(),
     submitterSchoolEmail: v.string(),
@@ -22,7 +22,7 @@ export const submitClub = mutation({
 
     await ctx.db.insert("clubSubmissions", {
       clubName: args.clubName.trim(),
-      description: args.description.trim(),
+      description: (args.description ?? "").trim(),
       submitterName: args.submitterName.trim(),
       submitterEmail: args.submitterEmail.trim(),
       submitterSchoolEmail: args.submitterSchoolEmail.trim(),
@@ -37,7 +37,7 @@ export const submitMultipleClubs = mutation({
   args: {
     clubs: v.array(v.object({
       clubName: v.string(),
-      description: v.string(),
+      description: v.optional(v.string()),
     })),
     submitterName: v.string(),
     submitterEmail: v.string(),
@@ -62,7 +62,7 @@ export const submitMultipleClubs = mutation({
 
         await ctx.db.insert("clubSubmissions", {
           clubName: club.clubName.trim(),
-          description: club.description.trim(),
+          description: (club.description ?? "").trim(),
           submitterName: args.submitterName.trim(),
           submitterEmail: args.submitterEmail.trim(),
           submitterSchoolEmail: args.submitterSchoolEmail.trim(),
