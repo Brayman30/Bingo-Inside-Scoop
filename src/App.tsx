@@ -101,24 +101,26 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+  <div className="min-h-screen flex flex-col" id="top">
       {/* Header / Hero combined */}
-      <header className="relative overflow-hidden pb-10 pt-16 animate-fade-in">
-        <div className="absolute inset-0 opacity-60 bg-gradient-brand-linear" />
+  <header className="relative overflow-hidden pb-10 pt-16 animate-fade-in" role="banner">
+        <div className="absolute inset-0 opacity-70 bg-gradient-brand-linear" />
         <div className="absolute inset-0 bg-gradient-radial-gold mix-blend-overlay" />
         <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-radial-green" />
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]" />
         <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight gradient-text-brand drop-shadow-sm mb-4 animate-rise">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-md mb-4 animate-rise">
               Grayson High School
             </h1>
-            <p className="text-lg md:text-2xl font-semibold gradient-text-gold mb-8">
+            <p className="text-lg md:text-2xl font-semibold text-grayson-gold drop-shadow-sm mb-8">
               Inside Scoop Club Bingo Challenge
             </p>
             <div className="max-w-3xl mx-auto card-glass card-glow-border p-8 md:p-10 animate-rise">
               <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-grayson-gold via-grayson-green to-grayson-navy shadow-brand-soft flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-grayson-gold via-grayson-green to-grayson-navy shadow-brand-soft flex items-center justify-center" aria-hidden="true">
+                  <svg className="w-8 h-8 text-white" role="img" aria-label="Menu layers icon" fill="currentColor" viewBox="0 0 20 20">
+                    <title>Club layers icon</title>
                     <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -126,7 +128,7 @@ export default function App() {
               <h2 className="text-2xl md:text-3xl font-bold text-grayson-navy mb-4">
                 Help Build Our Club Bingo Card!
               </h2>
-              <p className="text-base md:text-lg text-grayson-navy/80 leading-relaxed">
+              <p className="text-base md:text-lg text-grayson-navy/85 leading-relaxed">
                 Know awesome clubs at Grayson High School? Submit them below to be featured on the interactive bingo card. Explore different clubs, join new communities, and complete your card for prizes.
               </p>
               <div className="mt-8 grid sm:grid-cols-2 gap-4">
@@ -146,19 +148,20 @@ export default function App() {
         </div>
       </header>
 
+      <main id="main-content" className="flex-1">
       {/* Submission Form */}
-      <section className="relative py-20 px-6 lg:px-10">
+      <section className="relative py-20 px-6 lg:px-10" aria-labelledby="submit-clubs-heading">
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-grayson-gold-soft/20 to-transparent" />
         <div className="relative max-w-3xl mx-auto">
           <div className="card-glass card-glow-border p-8 md:p-10 animate-rise">
-            <h3 className="text-2xl md:text-3xl font-bold text-grayson-navy text-center mb-8">
+            <h2 id="submit-clubs-heading" className="text-2xl md:text-3xl font-bold text-grayson-navy text-center mb-8">
               Submit Club(s)
-            </h3>
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-10">
               {/* Personal Information */}
-              <div className="space-y-6">
+              <div className="space-y-6" aria-labelledby="your-info-heading">
                 <div className="flex items-center gap-3">
-                  <h4 className="text-lg font-semibold text-grayson-navy tracking-wide">Your Information</h4>
+                  <h3 id="your-info-heading" className="text-lg font-semibold text-grayson-navy tracking-wide">Your Information</h3>
                   <div className="flex-1 divider-soft" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -214,34 +217,36 @@ export default function App() {
               </div>
 
               {/* Clubs Section */}
-              <div className="space-y-6">
+              <div className="space-y-6" aria-labelledby="club-info-heading">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3">
-                    <h4 className="text-lg font-semibold text-grayson-navy tracking-wide">Club Information</h4>
+                    <h3 id="club-info-heading" className="text-lg font-semibold text-grayson-navy tracking-wide">Club Information</h3>
                     <span className="text-xs px-2 py-1 rounded bg-grayson-gold-soft text-grayson-navy/80 font-medium">{clubs.length} item{clubs.length !== 1 && 's'}</span>
                   </div>
                   <button
                     type="button"
                     onClick={addClub}
-                    className="btn-outline-brand text-sm"
+                    className="btn-outline-brand text-sm focus-ring"
+                    aria-label="Add another club submission form section"
                   >
                     + Add Club
                   </button>
                 </div>
                 <div className="space-y-8">
                   {clubs.map((club, index) => (
-                    <div key={index} className="relative rounded-xl border border-border-subtle/60 bg-white/60 backdrop-blur-sm p-6 shadow-brand-soft hover-raise transition-all">
+          <div key={index} className="relative rounded-xl border border-border-subtle/60 bg-white/60 backdrop-blur-sm p-6 shadow-brand-soft hover-raise transition-all" aria-labelledby={`club-${index}-heading`}>
                       {clubs.length > 1 && (
                         <button
                           type="button"
                           onClick={() => removeClub(index)}
-                          className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-danger text-white flex items-center justify-center text-sm shadow-md hover:brightness-110 focus:outline-none"
-                          title="Remove this club"
+              className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-danger text-white flex items-center justify-center text-sm shadow-md hover:brightness-110 focus-ring"
+              title="Remove this club"
+              aria-label={`Remove club ${index + 1}`}
                         >
                           ×
                         </button>
                       )}
-                      <h5 className="text-sm font-semibold tracking-wide text-grayson-navy/70 mb-4">Club #{index + 1}</h5>
+            <h4 id={`club-${index}-heading`} className="text-sm font-semibold tracking-wide text-grayson-navy/70 mb-4">Club #{index + 1}</h4>
                       <div className="space-y-5">
                         <div>
                           <label htmlFor={`clubName-${index}`} className="block text-xs font-semibold uppercase tracking-wider text-grayson-navy/70 mb-2">
@@ -279,7 +284,9 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-brand w-full py-4 text-base"
+                  className="btn-brand w-full py-4 text-base focus-ring"
+                  aria-live="polite"
+                  aria-label={isSubmitting ? 'Submitting clubs' : `Submit ${clubs.filter(c => c.clubName.trim() && c.description.trim()).length} clubs`}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
@@ -297,12 +304,12 @@ export default function App() {
       </section>
 
       {/* Submitted Clubs List */}
-      <section className="relative py-24 px-6 lg:px-10">
+      <section className="relative py-24 px-6 lg:px-10" aria-labelledby="all-clubs-heading">
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-grayson-navy-soft/10 to-transparent" />
         <div className="relative max-w-6xl mx-auto">
-          <h3 className="text-3xl md:text-4xl font-bold text-center gradient-text-brand mb-14">
+          <h2 id="all-clubs-heading" className="text-3xl md:text-4xl font-bold text-center text-white mb-14">
             All Submitted Clubs ({clubsCount})
-          </h3>
+          </h2>
           {allClubs.length === 0 ? (
             <div className="card-glass p-12 text-center">
               <p className="text-grayson-navy/70 text-lg">No clubs have been submitted yet. Be the first!</p>
@@ -313,11 +320,13 @@ export default function App() {
                 <div
                   key={club._id}
                   className="group relative card-glass p-6 hover-raise transition-all duration-300"
+                  role="article"
+                  aria-labelledby={`club-title-${club._id}`}
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-grayson-gold/15 via-transparent to-transparent pointer-events-none" />
-                  <h4 className="text-lg font-bold text-grayson-navy mb-3 tracking-tight">
+                  <h3 id={`club-title-${club._id}`} className="text-lg font-bold text-grayson-navy mb-3 tracking-tight">
                     {club.clubName}
-                  </h4>
+                  </h3>
                   <p className="text-sm text-grayson-navy/70 leading-relaxed mb-5 line-clamp-5">
                     {club.description}
                   </p>
@@ -336,9 +345,10 @@ export default function App() {
           )}
         </div>
       </section>
-
+      </main>
+      
       {/* Footer */}
-      <footer className="mt-auto relative bg-gradient-to-br from-grayson-navy via-grayson-green to-grayson-navy text-white/90 py-10">
+      <footer className="mt-auto relative bg-gradient-to-br from-grayson-navy via-grayson-green to-grayson-navy text-white/90 py-10" role="contentinfo">
         <div className="absolute inset-0 bg-gradient-radial-gold opacity-40 mix-blend-overlay" />
         <div className="relative max-w-5xl mx-auto px-6 text-center">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs md:text-sm tracking-wide">
